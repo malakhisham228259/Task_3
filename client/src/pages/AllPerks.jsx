@@ -173,10 +173,10 @@ export default function AllPerks() {
               </label>
               <select
                 className="input"
-                
+                     value={merchantFilter}
+  onChange={(e) => setMerchantFilter(e.target.value)}
               >
-                 value={merchantFilter}
-+   onChange={(e) => setMerchantFilter(e.target.value)}
+            
               
                 <option value="">All Merchants</option>
                 
