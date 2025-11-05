@@ -27,10 +27,25 @@ export default function AllPerks() {
  TODO: HOOKS TO IMPLEMENT
  * useEffect Hook #1: Initial Data Loading
  * useEffect Hook #2: Auto-search on Input Change
-
+ * 
 */
 
+  useEffect(() => {
+    loadAllPerks();
+  }, []) // Dependency: re-run when perks array changes
+
+
   
+  useEffect(() => {
+    loadAllPerks()
+  }, [searchQuery,merchantFilter]) // Dependency: re-run when perks array changes
+
+
+//   function handleInputChange(event)
+// {
+  
+//   setSearchQuery(event.target.value)
+// }
   useEffect(() => {
     // Extract all merchant names from perks array
     const merchants = perks
@@ -131,15 +146,21 @@ export default function AllPerks() {
               <label className="block text-sm font-medium text-zinc-700 mb-2">
                 <span className="material-symbols-outlined text-sm align-middle">search</span>
                 {' '}Search by Name
+                
+
               </label>
               <input
                 type="text"
                 className="input"
                 placeholder="Enter perk name..."
+                value={(searchQuery)}
+                onChange={(e)=>setSearchQuery(e.target.value)}
+            
                 
               />
               <p className="text-xs text-zinc-500 mt-1">
                 Auto-searches as you type, or press Enter / click Search
+
               </p>
             </div>
 
@@ -148,11 +169,15 @@ export default function AllPerks() {
               <label className="block text-sm font-medium text-zinc-700 mb-2">
                 <span className="material-symbols-outlined text-sm align-middle">store</span>
                 {' '}Filter by Merchant
+                
               </label>
               <select
                 className="input"
                 
               >
+                 value={merchantFilter}
++   onChange={(e) => setMerchantFilter(e.target.value)}
+              
                 <option value="">All Merchants</option>
                 
                 {uniqueMerchants.map(merchant => (
@@ -169,6 +194,7 @@ export default function AllPerks() {
             <button type="submit" className="btn bg-blue-600 text-white border-blue-600 hover:bg-blue-700">
               <span className="material-symbols-outlined text-sm align-middle">search</span>
               {' '}Search Now
+              onClick={handleSearch}
             </button>
             <button 
               type="button" 
